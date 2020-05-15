@@ -25,6 +25,6 @@ module.exports = {
 
   ],
   email: 'nate@nategramer.com',
-  phone: 'By request',
+  phone: 'Phone number by request',
   address: 'Chicago, IL 60618',
 };
