@@ -19,7 +19,7 @@ module.exports = {
     },
     {
       icon: 'fa-linkedin-in',
-      name: 'Linkedin',
+      name: 'LinkedIn',
       url: 'https://linkedin.com/in/ngramer',
     },
 
