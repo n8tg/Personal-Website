@@ -23,11 +23,16 @@ const IndexPage = () => (
             <a href={`mailto:${config.email}`}>{config.email}</a>
           </div>
           <p className="lead mb-5">
-            I am experienced in leveraging agile frameworks to provide a robust
-            synopsis for high level overviews. Iterative approaches to corporate
-            strategy foster collaborative thinking to further the overall value
-            proposition.
+          I’ve been working with Windows ever since I could get my hands on a computer.
+          I started out in IT as just another kid with a home PC that was frequently broken
+          in one way or another, usually by my own doing. 
           </p>
+          <p className="lead mb-5">By the time I reached high school, through all my mistakes, I had a solid understanding of networking concepts and was
+          running servers for a few different multiplayer games. My entry to Windows server
+          administration and corporate infrastructure began with the Glenview Park District
+          in 2013. From there, the rest is history. 
+          </p>
+
           <div className="social-icons">
             {config.socialLinks.map(social => {
               const { icon, url } = social;
@@ -50,34 +55,30 @@ const IndexPage = () => (
         <div className="w-100">
           <h2 className="mb-5">Experience</h2>
 
+          {/*Job position - Prescient Solutions*/}
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div className="resume-content">
-              <h3 className="mb-0">Senior Web Developer</h3>
-              <div className="subheading mb-3">Intelitec Solutions</div>
+              <h3 className="mb-0">IT Consultant</h3>
+              <div className="subheading mb-3">Prescient Solutions</div>
               <p>
-                Bring to the table win-win survival strategies to ensure
-                proactive domination. At the end of the day, going forward, a
-                new normal that has evolved from generation X is on the runway
-                heading towards a streamlined cloud solution. User generated
-                content in real-time will have multiple touchpoints for
-                offshoring.
+              At Prescient, I'm part of a "Do it all" team that's embedded onsite with our client.
+
+              Anything from server infrastructure, core networking, Active Directory, VDI, and application deployment, I'm behind it.
               </p>
             </div>
             <div className="resume-date text-md-right">
-              <span className="text-primary">March 2013 - Present</span>
+              <span className="text-primary">March 2017 - Present</span>
             </div>
           </div>
 
+          {/*Job position - Blue Star Solutions*/}
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div className="resume-content">
-              <h3 className="mb-0">Web Developer</h3>
-              <div className="subheading mb-3">Intelitec Solutions</div>
+              <h3 className="mb-0">Tier 2 Support</h3>
+              <div className="subheading mb-3">Blue Star Tec</div>
               <p>
-                Capitalize on low hanging fruit to identify a ballpark value
-                added activity to beta test. Override the digital divide with
-                additional clickthroughs from DevOps. Nanotechnology immersion
-                along the information highway will close the loop on focusing
-                solely on the bottom line.
+              At Blue Star, I was a part of a 15 person MSP team. Serving on the second line of support, I learned how vital solid documentation, good note taking, and quality monitoring and alerting is to an organization.
+              Being an MSP, I also gained invaluable experience with numerous business structures and environments.
               </p>
             </div>
             <div className="resume-date text-md-right">
@@ -85,32 +86,14 @@ const IndexPage = () => (
             </div>
           </div>
 
-          <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-            <div className="resume-content">
-              <h3 className="mb-0">Junior Web Designer</h3>
-              <div className="subheading mb-3">Shout! Media Productions</div>
-              <p>
-                Podcasting operational change management inside of workflows to
-                establish a framework. Taking seamless key performance
-                indicators offline to maximise the long tail. Keeping your eye
-                on the ball while performing a deep dive on the start-up
-                mentality to derive convergence on cross-platform integration.
-              </p>
-            </div>
-            <div className="resume-date text-md-right">
-              <span className="text-primary">July 2010 - December 2011</span>
-            </div>
-          </div>
-
+          {/*Job position - Glenview Parks*/}
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between">
             <div className="resume-content">
-              <h3 className="mb-0">Web Design Intern</h3>
-              <div className="subheading mb-3">Shout! Media Productions</div>
+              <h3 className="mb-0">Help Desk & Junior SysAdmin</h3>
+              <div className="subheading mb-3">Glenview Park District</div>
               <p>
-                Collaboratively administrate empowered markets via plug-and-play
-                networks. Dynamically procrastinate B2C users after installed
-                base benefits. Dramatically visualize customer directed
-                convergence without revolutionary ROI.
+              My entry into the IT world. I started on the help desk, consisting of myself and another full time employee.
+              I quickly moved into assisting with the park districts Terminal Servers, Active Directory administration, and assisting with the on premises Exchange environment.
               </p>
             </div>
             <div className="resume-date text-md-right">
@@ -131,24 +114,12 @@ const IndexPage = () => (
 
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div className="resume-content">
-              <h3 className="mb-0">University of Colorado Boulder</h3>
-              <div className="subheading mb-3">Bachelor of Science</div>
-              <div>Computer Science - Web Development Track</div>
-              <p>GPA: 3.23</p>
+              <h3 className="mb-0">University of Iowa</h3>
+              <div className="subheading mb-3">Bachelor of Arts</div>
+              <div>Geoinformatics - Minor in CS</div>
             </div>
             <div className="resume-date text-md-right">
-              <span className="text-primary">August 2006 - May 2010</span>
-            </div>
-          </div>
-
-          <div className="resume-item d-flex flex-column flex-md-row justify-content-between">
-            <div className="resume-content">
-              <h3 className="mb-0">James Buchanan High School</h3>
-              <div className="subheading mb-3">Technology Magnet Program</div>
-              <p>GPA: 3.56</p>
-            </div>
-            <div className="resume-date text-md-right">
-              <span className="text-primary">August 2002 - May 2006</span>
+              <span className="text-primary">August 2012 - May 2016</span>
             </div>
           </div>
         </div>
@@ -168,40 +139,22 @@ const IndexPage = () => (
           </div>
           <ul className="list-inline dev-icons">
             <li className="list-inline-item">
-              <i className="fab fa-html5"></i>
+              <i className="fab fa-aws"></i>
             </li>
             <li className="list-inline-item">
-              <i className="fab fa-css3-alt"></i>
+              <i class="fas fa-network-wired"></i>
             </li>
             <li className="list-inline-item">
-              <i className="fab fa-js-square"></i>
+              <i class="fab fa-centos"></i>
             </li>
             <li className="list-inline-item">
-              <i className="fab fa-angular"></i>
+              <i class="fab fa-linux"></i>
             </li>
             <li className="list-inline-item">
-              <i className="fab fa-react"></i>
+              <i class="fab fa-apple"></i>
             </li>
             <li className="list-inline-item">
-              <i className="fab fa-node-js"></i>
-            </li>
-            <li className="list-inline-item">
-              <i className="fab fa-sass"></i>
-            </li>
-            <li className="list-inline-item">
-              <i className="fab fa-less"></i>
-            </li>
-            <li className="list-inline-item">
-              <i className="fab fa-wordpress"></i>
-            </li>
-            <li className="list-inline-item">
-              <i className="fab fa-gulp"></i>
-            </li>
-            <li className="list-inline-item">
-              <i className="fab fa-grunt"></i>
-            </li>
-            <li className="list-inline-item">
-              <i className="fab fa-npm"></i>
+              <i class="fab fa-windows"></i>
             </li>
           </ul>
 
