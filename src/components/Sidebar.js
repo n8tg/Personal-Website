@@ -31,13 +31,13 @@ export class Sidebar extends Component {
           <span className="d-block d-lg-none">
             {config.firstName} {config.lastName}
           </span>
-          <span className="d-none d-lg-block">
+          {/*<span className="d-none d-lg-block">
             <img
               className="img-fluid img-profile rounded-circle mx-auto mb-2"
               src={avatar}
               alt=""
             />
-          </span>
+          </span> */}
         </a>
         <button
           className="navbar-toggler"

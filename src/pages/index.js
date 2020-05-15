@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 // import { Link } from 'gatsby';
 import Sidebar from '../components/Sidebar';
 import config from '../../config';
+import avatar from '../assets/images/me2.jpeg';
 const IndexPage = () => (
   <Layout>
     <Sidebar />
@@ -31,8 +32,7 @@ const IndexPage = () => (
           running servers for a few different multiplayer games. My entry to Windows server
           administration and corporate infrastructure began with the Glenview Park District
           in 2013. From there, the rest is history. 
-          </p>
-
+          </p>      
           <div className="social-icons">
             {config.socialLinks.map(social => {
               const { icon, url } = social;
@@ -44,6 +44,13 @@ const IndexPage = () => (
             })}
           </div>
         </div>
+        <span className="d-none d-lg-block">
+            <img
+              className="img-fluid img-profile mx-auto mb-2"
+              src={avatar}
+              alt=""
+            />
+          </span>
       </section>
 
       <hr className="m-0" />
