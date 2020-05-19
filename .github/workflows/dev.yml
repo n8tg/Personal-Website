@@ -48,4 +48,4 @@ jobs:
       with:
         name: dev-nategramer
         template: AWSEnvironment.yaml
-        parameter-overrides: "Domain_Prefix="dev.","AWS_SSL_CERT_ARN"=${{ secrets.AWS_SSL_CERT_ARN }}"
+        parameter-overrides: "Domain_Prefix=dev.,AWS_SSL_CERT_ARN=${{ secrets.AWS_SSL_CERT_ARN }}"
