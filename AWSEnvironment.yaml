@@ -4,8 +4,15 @@ Description: >
   "This CloudFormation template will deploy a static site via an S3 bucket,
   CloudFront distribution, Route53 record, and an existing Wildcard Cert"
 
-Mappings:
+Parameters:
+  DomainPrefix:
+    Description: Prefix which is prepended to nategramer.com 
+    Type: String
+  SSLCertARN:
+    Description: ARN for Wildcard nategramer.com ssl certificate
+    Type: String
 
+Mappings:
   Region2S3WebsiteSuffix:
     us-east-1:
       Suffix: .s3-website-us-east-1.amazonaws.com
@@ -35,12 +42,11 @@ Mappings:
       Suffix: .s3-website.eu-central-1.amazonaws.com
 
 Resources:
-
   WebBucket:
     Type: AWS::S3::Bucket
     Properties: 
       AccessControl: PublicRead 
-      BucketName: !Join ['', [!Sub ${Domain_Prefix}, "nategramer"]]
+      BucketName: !Sub "${DomainPrefix}nategramer"
       WebsiteConfiguration: 
         ErrorDocument: "404.html"
         IndexDocument: "index.html"
@@ -50,12 +56,13 @@ Resources:
     Properties:
       Bucket: !Ref WebBucket
       PolicyDocument:
-        - 
-          Action: 
-            - "s3:GetObject"
-          Effect: "Allow"
-          Resource: !Join ['', ["arn:aws:s3:::", !Ref WebBucket, "/*"]]
-          Principal: "*"
+        Statement:
+          - 
+            Action: 
+              - "s3:GetObject"
+            Effect: "Allow"
+            Resource: !Join ['', ["arn:aws:s3:::", !Ref WebBucket, "/*"]]
+            Principal: "*"
       
   cloudfrontDistribution:
     Type: AWS::CloudFront::Distribution
@@ -66,7 +73,7 @@ Resources:
         Enabled: true
         DefaultRootObject: index.html
         Aliases: 
-        - !Join ['', [!Sub ${Domain_Prefix}, "nategramer.com."]]
+        - !Sub "${DomainPrefix}nategramer.com"
         DefaultCacheBehavior:
            ForwardedValues:
              QueryString: false
@@ -89,12 +96,12 @@ Resources:
         IPV6Enabled: true
         ViewerCertificate:
           SslSupportMethod: sni-only
-          AcmCertificateArn: !Sub ${AWS_SSL_Cert_ARN}
+          AcmCertificateArn: !Sub ${SSLCertARN}
     
   route53RS:
     Type: AWS::Route53::RecordSet
     Properties:
-      Name: !Join ['', [!Sub ${Domain_Prefix}, "nategramer.com."]]
+      Name: !Sub "${DomainPrefix}nategramer.com."
       # AWS's aliases need to be A records for some reason
       Type: A
       HostedZoneName: nategramer.com.
@@ -106,4 +113,4 @@ Resources:
 Outputs:
   WebsiteURL:
     Description: FQDN of the deployed site
-    Value: !Join ['', ["https://", !Sub ${Domain_Prefix}, "nategramer.com"]]
+    Value: !Sub "https://${DomainPrefix}nategramer.com"
