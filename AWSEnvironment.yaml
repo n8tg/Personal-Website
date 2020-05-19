@@ -4,8 +4,15 @@ Description: >
   "This CloudFormation template will deploy a static site via an S3 bucket,
   CloudFront distribution, Route53 record, and an existing Wildcard Cert"
 
-Mappings:
+Parameters:
+  Domain_Prefix:
+    Description: Prefix which is prepended to nategramer.com 
+    Type: String
+  AWS_SSL_CERT_ARN:
+    Description: ARN for Wildcard nategramer.com ssl certificate
+    Type: String
 
+Mappings:
   Region2S3WebsiteSuffix:
     us-east-1:
       Suffix: .s3-website-us-east-1.amazonaws.com
@@ -35,7 +42,6 @@ Mappings:
       Suffix: .s3-website.eu-central-1.amazonaws.com
 
 Resources:
-
   WebBucket:
     Type: AWS::S3::Bucket
     Properties: 
@@ -89,7 +95,7 @@ Resources:
         IPV6Enabled: true
         ViewerCertificate:
           SslSupportMethod: sni-only
-          AcmCertificateArn: !Sub ${AWS_SSL_Cert_ARN}
+          AcmCertificateArn: !Sub ${AWS_SSL_CERT_ARN}
     
   route53RS:
     Type: AWS::Route53::RecordSet
