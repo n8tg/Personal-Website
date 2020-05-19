@@ -5,10 +5,10 @@ Description: >
   CloudFront distribution, Route53 record, and an existing Wildcard Cert"
 
 Parameters:
-  Domain_Prefix:
+  DomainPrefix:
     Description: Prefix which is prepended to nategramer.com 
     Type: String
-  AWS_SSL_CERT_ARN:
+  SSLCertARN:
     Description: ARN for Wildcard nategramer.com ssl certificate
     Type: String
 
@@ -46,7 +46,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties: 
       AccessControl: PublicRead 
-      BucketName: !Sub "${Domain_Prefix}nategramer"
+      BucketName: !Sub "${DomainPrefix}nategramer"
       WebsiteConfiguration: 
         ErrorDocument: "404.html"
         IndexDocument: "index.html"
@@ -72,7 +72,7 @@ Resources:
         Enabled: true
         DefaultRootObject: index.html
         Aliases: 
-        - !Sub "${Domain_Prefix}nategramer"
+        - !Sub "${DomainPrefix}nategramer"
         DefaultCacheBehavior:
            ForwardedValues:
              QueryString: false
@@ -95,12 +95,12 @@ Resources:
         IPV6Enabled: true
         ViewerCertificate:
           SslSupportMethod: sni-only
-          AcmCertificateArn: !Sub ${AWS_SSL_CERT_ARN}
+          AcmCertificateArn: !Sub ${SSLCertARN}
     
   route53RS:
     Type: AWS::Route53::RecordSet
     Properties:
-      Name: !Sub "${Domain_Prefix}nategramer"
+      Name: !Sub "${DomainPrefix}nategramer"
       # AWS's aliases need to be A records for some reason
       Type: A
       HostedZoneName: nategramer.com.
@@ -112,4 +112,4 @@ Resources:
 Outputs:
   WebsiteURL:
     Description: FQDN of the deployed site
-    Value: !Sub "https://${Domain_Prefix}nategramer.com"
+    Value: !Sub "https://${DomainPrefix}nategramer.com"
