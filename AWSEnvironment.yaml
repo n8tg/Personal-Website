@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Description: >
-"This CloudFormation template will deploy a static site via an S3 bucket,
-CloudFront distribution, Route53 record, and an existing Wildcard Cert"
+  "This CloudFormation template will deploy a static site via an S3 bucket,
+  CloudFront distribution, Route53 record, and an existing Wildcard Cert"
 
 Mappings:
 
