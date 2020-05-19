@@ -56,12 +56,13 @@ Resources:
     Properties:
       Bucket: !Ref WebBucket
       PolicyDocument:
-        - 
-          Action: 
-            - "s3:GetObject"
-          Effect: "Allow"
-          Resource: !Join ['', ["arn:aws:s3:::", !Ref WebBucket, "/*"]]
-          Principal: "*"
+        Statement:
+          - 
+            Action: 
+              - "s3:GetObject"
+            Effect: "Allow"
+            Resource: !Join ['', ["arn:aws:s3:::", !Ref WebBucket, "/*"]]
+            Principal: "*"
       
   cloudfrontDistribution:
     Type: AWS::CloudFront::Distribution
