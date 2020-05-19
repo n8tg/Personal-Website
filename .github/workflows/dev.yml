@@ -38,6 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy CloudFormation Template  
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
