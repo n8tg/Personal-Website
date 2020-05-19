@@ -112,4 +112,4 @@ Resources:
 Outputs:
   WebsiteURL:
     Description: FQDN of the deployed site
-    Value: !Join ['', ["https://", !Sub ${Domain_Prefix}, "nategramer.com"]]
+    Value: !Sub "https://${Domain_Prefix}nategramer.com"
