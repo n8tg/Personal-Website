@@ -59,4 +59,5 @@ jobs:
       with:
         name: dev-nategramer
         template: AWSEnvironment.yaml
+        no-fail-on-empty-changeset: "1"
         parameter-overrides: "DomainPrefix=dev.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
