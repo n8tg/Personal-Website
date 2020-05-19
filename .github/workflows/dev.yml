@@ -15,8 +15,10 @@ jobs:
     name: Build Gatsby Site
     needs: deploy-environment
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      
     - name: Checkout and Build Gatsby Site
-    - uses: actions/checkout@v2
       uses: jzweifel/gatsby-cli-github-action@master
       with:
         gatsby-arg: build
