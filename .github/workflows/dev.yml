@@ -5,9 +5,11 @@ name: DevDeploy
 # Controls when the action will run. Triggers the workflow on push or pull request
 on:
   push:
-    branches: dev
+    branches: 
+    - dev
   pull_request:
-    branches: dev
+    branches:
+    - dev
 
 jobs:
   gatsby-build:
