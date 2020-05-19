@@ -73,7 +73,7 @@ Resources:
         Enabled: true
         DefaultRootObject: index.html
         Aliases: 
-        - !Sub "${DomainPrefix}nategramer"
+        - !Sub "${DomainPrefix}nategramer.com"
         DefaultCacheBehavior:
            ForwardedValues:
              QueryString: false
