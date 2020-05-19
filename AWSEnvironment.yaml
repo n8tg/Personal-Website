@@ -101,7 +101,7 @@ Resources:
   route53RS:
     Type: AWS::Route53::RecordSet
     Properties:
-      Name: !Sub "${DomainPrefix}nategramer"
+      Name: !Sub "${DomainPrefix}nategramer.com."
       # AWS's aliases need to be A records for some reason
       Type: A
       HostedZoneName: nategramer.com.
