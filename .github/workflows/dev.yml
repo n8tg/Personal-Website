@@ -15,18 +15,11 @@ jobs:
     name: Build Gatsby Site
     needs: deploy-environment
     steps:
-      # Build the Gatsby Site
-    - name: Run Gatsby Site builder
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@master
-      - name: Build Gatsby Site
-        uses: jzweifel/gatsby-cli-github-action@master
-        with:
-          gatsby-arg: build
-    
-    - name: Checkout
-      uses: actions/checkout@v2
+    - name: Checkout and Build Gatsby Site
+    - uses: actions/checkout@v2
+      uses: jzweifel/gatsby-cli-github-action@master
+      with:
+        gatsby-arg: build
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
