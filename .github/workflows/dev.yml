@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: DevDeploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+on:
+  push:
+    branches: 
+    - 'dev'
+  pull_request:
+    branches:
+    - 'dev'
+
+jobs:
+  gatsby-build:
+    runs-on: ubuntu-latest
+    name: Build Gatsby Site
+    needs: deploy-environment
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with: 
+        ref: dev
+      
+    - name: Checkout and Build Gatsby Site
+      uses: jzweifel/gatsby-cli-github-action@master
+      with:
+        gatsby-arg: build
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Copy files to S3 with the AWS CLI
+      run: |
+        aws s3 sync ./public s3://dev.nategramer
+
+  deploy-environment:
+    runs-on: ubuntu-latest
+    name: Deploy CloudFormation Template  
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with: 
+        ref: dev
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Deploy to AWS CloudFormation
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
+        name: dev-nategramer
+        template: AWSEnvironment.yaml
+        no-fail-on-empty-changeset: "1"
+        parameter-overrides: "DomainPrefix=dev.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
