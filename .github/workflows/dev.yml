@@ -1,17 +1,15 @@
-# This is a basic workflow to help you get started with Actions
+name: Deploy Development Site
 
-name: DevDeploy
-
-# Controls when the action will run. Triggers the workflow on push or pull request
+# Controls when the action will run. Triggers the workflow on push
 on:
   push:
     branches: 
     - 'dev'
 
 jobs:
-  gatsby-build:
+  build-and-copy:
     runs-on: ubuntu-latest
-    name: Build Gatsby Site
+    name: Build Gatsby Site and Copy to S3
     needs: deploy-environment
     steps:
     - name: Checkout Code
@@ -37,7 +35,7 @@ jobs:
 
   deploy-environment:
     runs-on: ubuntu-latest
-    name: Deploy CloudFormation Template  
+    name: Deploy CloudFormation Template
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
