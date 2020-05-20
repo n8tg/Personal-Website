@@ -1,5 +1,7 @@
 # Nate Gramer's Personal Website
 
+![Deploy Development Site](https://github.com/n8tg/Personal-Website/workflows/Deploy%20Development%20Site/badge.svg?branch=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 This is my Gatsby.js website based on Resume by startbootstrap.
 
 I wanted to create a website with a build process that I could CI/CD out to cloud providers (AWS in particular). While I'm certainly not a Web Developer, I didn't like the idea of a flat, boring, Bootstrap site on its own. 
@@ -23,16 +25,6 @@ TODO: Find that python based architecture generator & Create deployment graphic
 
 Check out the great instructions by [Anubhav](https://github.com/anubhavsrivastava/gatsby-starter-resume)
 
-### Deploying using Github page
-
-Will be removing Github page branch
-
 ### Contribution
 
 Spelling and Grammar corrections are welcome!
-
-### License
-
-[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](LICENSE)
-
-refer `LICENSE` file in this repository.
