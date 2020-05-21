@@ -30,7 +30,8 @@ jobs:
   deploy-site:
     runs-on: ubuntu-latest
     name: Copy site artifact to S3 and invalidate CloudFront distribution
-    needs: [deploy-environment, build-site]
+    needs: ["deploy-environment", "build-site"]
+    steps:
     - name: Retrieve Site artifact
       uses: actions/download-artifact@v2
       with:
