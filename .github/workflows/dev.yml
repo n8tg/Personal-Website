@@ -49,7 +49,6 @@ jobs:
         aws s3 sync ./public s3://dev.nategramer
 
     - name: Get CloudFront Distribution Details
-      outputs: 
       run: |
         echo "::set-env name=CF_DEPLOYMENT::$(aws cloudformation describe-stack-resource \
         --stack-name dev-nategramer \
