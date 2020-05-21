@@ -53,7 +53,7 @@ jobs:
         echo "::set-env name=CF_DEPLOYMENT::$(aws cloudformation describe-stack-resource \
         --stack-name dev-nategramer \
         --logical-resource-id cloudfrontDistribution \
-        | jq .StackResourceDetail.PhysicalResourceId)"
+        | jq -r .StackResourceDetail.PhysicalResourceId)"
     
     - name: Invalidate Cloudfront distribution
       uses: chetan/invalidate-cloudfront-action@master
