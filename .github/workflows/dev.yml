@@ -46,7 +46,7 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync ./public s3://dev.nategramer
+        aws s3 sync . s3://dev.nategramer
 
     - name: Get CloudFront Distribution Details
       run: |
