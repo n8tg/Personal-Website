@@ -74,7 +74,12 @@ jobs:
 
     - name: Extract branch name
       id: branchstep
-      run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
+      run: |
+        echo ::set-output name=branch::${GITHUB_REF#refs/*/}
+
+    - name: save branch name ENV
+      run: | 
+        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -86,7 +91,7 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-        name: ${{ deploy-environment.branchstep.branch }}-nategramer
+        name: ${{  env.branch }}-nategramer
         template: AWSEnvironment.yaml
         no-fail-on-empty-changeset: "1"
-        parameter-overrides: "DomainPrefix=${{ deploy-environment.branchstep.branch }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
+        parameter-overrides: "DomainPrefix=${{  env.branch }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
