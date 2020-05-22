@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy CloudFormation Template
     outputs:
-      branchname: ${{ steps.deploy-environment.branchstep.branch }}
+      branch: ${{ steps.deploy-environment.branchstep.branch }}
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
