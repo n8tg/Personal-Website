@@ -14,8 +14,10 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+      with:
+        ref: ${{ GITHUB_REF }}
       
-    - name: Checkout and Build Gatsby Site
+    - name: Build Gatsby Site
       uses: jzweifel/gatsby-cli-github-action@master
       with:
         gatsby-arg: build
@@ -71,6 +73,8 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+      with:
+        ref: ${{ GITHUB_REF }}
 
     - name: Extract branch name
       id: branchstep
