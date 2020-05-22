@@ -18,7 +18,7 @@ jobs:
         ref: ${{ env.GITHUB_REF }}
       
     - name: Build Gatsby Site
-      uses: jzweifel/gatsby-cli-github-action@master
+      uses: n8tg/gatsby-cli-github-action@master
       with:
         gatsby-arg: build
 
