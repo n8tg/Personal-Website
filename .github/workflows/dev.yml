@@ -38,6 +38,10 @@ jobs:
       with:
         name: Built-Site
 
+    - name: Save branch name in ENV
+      run: | 
+        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -47,12 +51,12 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync . s3://${{ needs.deploy-environment.outputs.branch }}.nategramer
+        aws s3 sync . s3://${{ env.branch }}.nategramer
 
     - name: Get CloudFront Distribution Details
       run: |
         echo "::set-env name=CF_DEPLOYMENT::$(aws cloudformation describe-stack-resource \
-        --stack-name ${{ needs.deploy-environment.outputs.branch }}-nategramer \
+        --stack-name ${{ env.branch }}-nategramer \
         --logical-resource-id cloudfrontDistribution \
         | jq -r .StackResourceDetail.PhysicalResourceId)"
     
@@ -76,12 +80,7 @@ jobs:
       with:
         ref: ${{ env.GITHUB_REF }}
 
-    - name: Extract branch name
-      id: branchstep
-      run: |
-        echo ::set-output name=branch::${GITHUB_REF#refs/*/}
-
-    - name: save branch name ENV
+    - name: Save branch name in ENV
       run: | 
         echo ::set-env name=branch::${GITHUB_REF#refs/*/}
 
