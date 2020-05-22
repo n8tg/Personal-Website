@@ -4,7 +4,7 @@ name: Deploy Development Site
 on:
   push:
     branches: 
-    - '!master'
+    - "!master"
 
 jobs:
   build-site:
