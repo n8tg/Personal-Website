@@ -8,6 +8,9 @@ on:
 
 jobs:
   clean-env:
+    runs-on: ubuntu-latest
+    name: Remove branch deployed environment 
+    steps:
     - name: Save branch name in ENV
       run: | 
         echo ::set-env name=branch::${GITHUB_REF#refs/*/}
