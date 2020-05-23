@@ -5,9 +5,6 @@ Description: >
   CloudFront distribution, Route53 record, and an existing Wildcard Cert"
 
 Parameters:
-  DomainPrefix:
-    Description: Prefix which is prepended to nategramer.com 
-    Type: String
   SSLCertARN:
     Description: ARN for Wildcard nategramer.com ssl certificate
     Type: String
