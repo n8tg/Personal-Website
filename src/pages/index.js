@@ -22,15 +22,14 @@ const IndexPage = () => (
           <div className="subheading mb-5">
             {config.address} · <a href={`mailto:${config.email}`}>{config.email}</a>
           </div>
-          <p className="lead mb-5">
-          I’ve been working with Windows ever since I could get my hands on a computer.
-          I started out in IT as just another kid with a home PC that was frequently broken
-          in one way or another, usually by my own doing. 
+          <p className="lead">
+          Hi! I'm Nate, a Chicago based fella interested in most things technology. You can usually find me in a game of
+           Rocket League, CS:GO, tinkering on one of my pet projects, or out enjoying one of Logan Square's establishments. 
           </p>
-          <p className="lead mb-5">By the time I reached high school, through all my mistakes, I had a solid understanding of networking concepts and was
-          running servers for a few different multiplayer games. My entry to Windows server
-          administration and corporate infrastructure began with the Glenview Park District
-          in 2013. From there, the rest is history. 
+          <p className="lead mb-5">
+          Outside of technology, I am an aspiring professional home cook (no foodstagram yet), nature enjoyer, and a flying enthusiast.
+          </p>
+          <p className="lead mb-5">
           </p>      
           <div className="social-icons">
             {config.socialLinks.map(social => {
@@ -55,6 +54,27 @@ const IndexPage = () => (
       <hr className="m-0" />
 
       <section
+        className="resume-section p-3 p-lg-5 d-flex align-items-center"
+        id="about"
+      >
+        <div className="w-100">
+          <h2 className="mb-5">About</h2>
+          <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div className="resume-content">
+            <p>
+            I started out in IT as just another kid with a home PC that was frequently broken
+            in one way or another, usually by my own doing. By the time I reached high school, through all my mistakes, I had a solid understanding of networking and computing concepts; I was
+            running servers for a few different multiplayer games. My entry to IT and corporate infrastructure began with the Glenview Park District
+            in 2013. I soaked up as much knowledge as I could from my mentor, a former ISP engineer. From there, the rest is history. 
+            </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="m-0" />
+
+      <section
         className="resume-section p-3 p-lg-5 d-flex justify-content-center"
         id="experience"
       >
@@ -65,12 +85,14 @@ const IndexPage = () => (
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div className="resume-content">
               <h3 className="mb-0">IT Consultant</h3>
-              <div className="subheading mb-3">Prescient Solutions</div>
+              <div className="subheading mb-3">Prescient Solutions at MC Group / Icon</div>
               <p>
               At Prescient, I'm part of a "Do it all" team that's embedded onsite with our client.
-
-              Anything from server infrastructure, core networking, Active Directory, VDI, and application deployment,
-              I'm behind it.
+              </p><p>
+              Anything from server infrastructure, core / public networking, network security, Active Directory, VDI, and application deployment,
+              the team and myself are behind it.
+              </p><p>
+              Icon hosts several mobile applications, customer portals, and a home grown ERP system; all on premises.
               </p>
             </div>
             <div className="resume-date text-md-right">
@@ -86,7 +108,7 @@ const IndexPage = () => (
               <p>
               At Blue Star, I was a part of a 15 person MSP team. Serving on the second line of support, I learned how
               vital solid documentation, good note taking, and quality monitoring and alerting is to an organization.
-              Being an MSP, I also gained invaluable experience with numerous business structures and environments.
+              Being an MSP, I also gained invaluable experience with numerous business structures and operating methods.
               </p>
             </div>
             <div className="resume-date text-md-right">
@@ -106,6 +128,48 @@ const IndexPage = () => (
             </div>
             <div className="resume-date text-md-right">
               <span className="text-primary">September 2008 - June 2010</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="m-0" />
+
+      <section
+        className="resume-section p-3 p-lg-5 d-flex align-items-center"
+        id="projects"
+      >
+        <div className="w-100">
+          <h2 className="mb-5">Projects</h2>
+
+          {/*Projects - Personal Website*/}
+          <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div className="resume-content">
+              <a key="https://github.com/n8tg/Personal-Website" href="https://github.com/n8tg/Personal-Website">
+                <h3 className="mb-0"><i className="fab fa-github"></i> Personal Website</h3>
+              </a>
+              <p>
+               This website here has been a fun pet project of mine. As I work my way through an AWS Solutions Associate
+               exam course, I'm using this website as a way to practice what I learn. The site is being deployed through a GitHub Actions
+               CI/CD pipeline to AWS. Check out the repository on GitHub!
+              </p><p>
+                NateGramer.com runs on a public S3 bucket and is served by CloudFront. 
+              </p>
+            </div>
+          </div>
+
+          {/*Projects - Personal Website*/}
+          <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div className="resume-content">
+              <h3 className="mb-0">GroupMe Chat Bot</h3>
+              <p>
+               Public repo coming soon! BotBoy, our helpful Python based robot, keeps an eye on our chat. It interacts with the GroupMe API 
+               to keep track of message statistics (who gives out the most likes, frequent chatter, etc.). It also directly interacts with chat
+               to allow for nominations to our Comment of the Year Awards.
+              </p>
+              <p>
+               BotBoy is currently backed by AWS Lambda, DynamoDB, and is written in Python. 
+              </p>
             </div>
           </div>
         </div>
@@ -176,7 +240,7 @@ const IndexPage = () => (
           <ul className="fa-ul mb-0">
             <li>
               <i className="fa-li fa fa-trophy text-warning"></i>
-              1st in state - US Cyber Challenge - 2011 - Reliving the Highschool glory days.
+              1st in state - US Cyber Challenge - 2011 - Reliving the Highschool glory days in a competition that tested basic OS administration, networking, scripting, and security concepts
             </li>
           </ul>
         </div>
