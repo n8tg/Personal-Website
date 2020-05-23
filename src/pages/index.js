@@ -158,7 +158,7 @@ const IndexPage = () => (
             </div>
           </div>
 
-          {/*Projects - Personal Website*/}
+          {/*Projects - BotBoy */}
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div className="resume-content">
               <h3 className="mb-0">GroupMe Chat Bot</h3>
@@ -169,6 +169,20 @@ const IndexPage = () => (
               </p>
               <p>
                BotBoy is currently backed by AWS Lambda, DynamoDB, and is written in Python. 
+              </p>
+            </div>
+          </div>
+          {/*Projects - BotBoy */}
+           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div className="resume-content">
+              <h3 className="mb-0">College Project - Twitter Sentiment Mapping</h3>
+              <p>
+               Although the code is long gone, ony of my favorite projects mapped the sentiment of tweets around the Iowa campus. I used Stanford's
+               sentiment analysis API, and piped in tweets that were fed to me via Twitter's API. Not surprisingly, the bars were among the
+               happiest places to be. 
+              </p>
+              <p>
+               This project was backed by Python, sqlite, and an EC2 instance.
               </p>
             </div>
           </div>
