@@ -110,4 +110,4 @@ Resources:
 Outputs:
   WebsiteURL:
     Description: FQDN of the deployed site
-    Value: !Sub "https://${DomainPrefix}nategramer.com"
+    Value: "https://nategramer.com"
