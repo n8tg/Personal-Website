@@ -84,6 +84,6 @@ jobs:
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
         name: nategramer
-        template: AWSEnvironment.yaml
+        template: MasterAWSEnvironment.yaml
         no-fail-on-empty-changeset: "1"
-        parameter-overrides: "DomainPrefix=~,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
+        parameter-overrides: "SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
