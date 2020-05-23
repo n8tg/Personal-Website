@@ -1,4 +1,4 @@
-name: Deploy Development Site
+name: Deploy Master Site
 
 # This will always keep the development site up to date for hotfixes.
 on:

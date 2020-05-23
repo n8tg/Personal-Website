@@ -177,7 +177,7 @@ const IndexPage = () => (
             <div className="resume-content">
               <h3 className="mb-0">College Project - Twitter Sentiment Mapping</h3>
               <p>
-               Although the code is long gone, ony of my favorite projects mapped the sentiment of tweets around the Iowa campus. I used Stanford's
+               Although the code is long gone, one of my favorite projects mapped the sentiment of tweets around the Iowa campus. I used Stanford's
                sentiment analysis API, and piped in tweets that were fed to me via Twitter's API. Not surprisingly, the bars were among the
                happiest places to be. 
               </p>
