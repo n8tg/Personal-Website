@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Scrollspy from 'react-scrollspy';
 import Scroll from './Scroll';
 
-import avatar from '../assets/images/avatar.png';
+import avatar from '../assets/images/me.jpeg';
 import config from '../../config';
 
 export class Sidebar extends Component {
@@ -11,17 +11,27 @@ export class Sidebar extends Component {
     this.state = {
       tabs: [
         { content: 'About', href: 'about' },
+        { content: 'History', href: 'history' },
         { content: 'Experience', href: 'experience' },
+        { content: 'Projects', href: 'projects' },
         { content: 'Education', href: 'education' },
         { content: 'Skills', href: 'skills' },
         { content: 'Interests', href: 'interests' },
         { content: 'Awards', href: 'awards' },
       ],
+      isCollapsed: true,
     };
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+  }
+
+  toggleNavbar() {
+    this.setState({
+      isCollapsed: !this.state.isCollapsed,
+    });
   }
 
   render() {
-    const { tabs } = this.state;
+    const { tabs, isCollapsed } = this.state;
     return (
       <nav
         className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
@@ -31,26 +41,29 @@ export class Sidebar extends Component {
           <span className="d-block d-lg-none">
             {config.firstName} {config.lastName}
           </span>
-          <span className="d-none d-lg-block">
+          {/*<span className="d-none d-lg-block">
             <img
               className="img-fluid img-profile rounded-circle mx-auto mb-2"
               src={avatar}
               alt=""
             />
-          </span>
+          </span> */}
         </a>
         <button
-          className="navbar-toggler"
+          className={`navbar-toggler navbar-toggler-right ${
+            isCollapsed ? 'collapsed' : ''
+            }`}
           type="button"
           data-toggle="collapse"
-          data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={this.toggleNavbar}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className={`collapse navbar-collapse ${isCollapsed ? '' : 'show'}`}
+          id="navbarSupportedContent">
           <Scrollspy
             items={tabs.map(s => s.href)}
             currentClassName="active"

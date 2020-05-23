@@ -1,0 +1,100 @@
+name: Build out branch environment for testing before a merge is completed
+
+on:
+  pull_request:
+    branches:
+    - "*"
+    - "!master"
+    - "!dev"
+    
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    name: Build Gatsby Site and save as an artifact
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ env.GITHUB_REF }}
+      
+    - name: Build Gatsby Site
+      uses: n8tg/gatsby-cli-github-action@master
+      with:
+        gatsby-arg: build
+
+    - name: Save built site as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Built-Site
+        path: ./public
+
+  deploy-site:
+    runs-on: ubuntu-latest
+    name: Copy site artifact to S3 and invalidate CloudFront distribution
+    needs: ["deploy-environment", "build-site"]
+    steps:
+    - name: Retrieve Site artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: Built-Site
+
+    - name: Save branch name in ENV
+      run: | 
+        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Copy files to S3 with the AWS CLI
+      run: |
+        aws s3 sync . s3://${{ env.branch }}.nategramer
+
+    - name: Get CloudFront Distribution Details
+      run: |
+        echo "::set-env name=CF_DEPLOYMENT::$(aws cloudformation describe-stack-resource \
+        --stack-name ${{ env.branch }}-nategramer \
+        --logical-resource-id cloudfrontDistribution \
+        | jq -r .StackResourceDetail.PhysicalResourceId)"
+    
+    - name: Invalidate Cloudfront distribution
+      uses: chetan/invalidate-cloudfront-action@master
+      env:
+        DISTRIBUTION: ${{ env.CF_DEPLOYMENT }}
+        PATHS: '/*'
+        AWS_REGION: 'us-east-1'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  deploy-environment:
+    runs-on: ubuntu-latest
+    name: Deploy CloudFormation Template
+    outputs:
+      branch: ${{ steps.deploy-environment.branchstep.branch }}
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ env.GITHUB_REF }}
+
+    - name: Save branch name in ENV
+      run: | 
+        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+   
+    - name: Deploy to AWS CloudFormation
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
+        name: ${{  env.branch }}-nategramer
+        template: AWSEnvironment.yaml
+        no-fail-on-empty-changeset: "1"
+        parameter-overrides: "DomainPrefix=${{  env.branch }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
