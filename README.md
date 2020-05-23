@@ -15,11 +15,7 @@ React and Gatsby seem to fit this bill with strong plugin support, so I'm rollin
 
 ## Site Architecture
 
-TODO: Find that python based architecture generator & Create architecture graphic
-
-## CI/CD Pipeline Process
-
-TODO: Find that python based architecture generator & Create deployment graphic
+![Site Diagram](nategramer.com_-_s3_backed_public_website.png)
 
 ## Cloning / Forking this repo
 
