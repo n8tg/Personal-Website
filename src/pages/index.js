@@ -55,10 +55,10 @@ const IndexPage = () => (
 
       <section
         className="resume-section p-3 p-lg-5 d-flex align-items-center"
-        id="about"
+        id="history"
       >
         <div className="w-100">
-          <h2 className="mb-5">About</h2>
+          <h2 className="mb-5">A Brief History</h2>
           <div className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div className="resume-content">
             <p>
