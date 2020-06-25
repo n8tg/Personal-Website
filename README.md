@@ -17,7 +17,7 @@ React and Gatsby seem to fit this bill with strong plugin support, so I'm rollin
 
 ![Site Diagram](nategramer.com_-_s3_backed_public_website.png)
 
-## Cloning / Forking this repo
+## Cloning / Forking / Making this repo your own
 
 Check out the great instructions by [Anubhav](https://github.com/anubhavsrivastava/gatsby-starter-resume)
 
