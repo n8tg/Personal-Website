@@ -87,7 +87,7 @@ const IndexPage = () => (
               <h3 className="mb-0">IT Consultant</h3>
               <div className="subheading mb-3">Prescient Solutions at MC Group / Icon</div>
               <p>
-              At Prescient, I'm part of a "Do it all" team that's embedded onsite with our client.
+              At Prescient, I'm part of a "do it all" team that's embedded onsite with our client.
               </p><p>
               Anything from server infrastructure, core / public networking, network security, Active Directory, VDI, and application deployment,
               the team and myself are behind it.
