@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 // import { Link } from 'gatsby';
 import Sidebar from '../components/Sidebar';
 import config from '../../config';
-import avatar from '../assets/images/me2.jpeg';
+import avatar from '../assets/images/me3.png';
 const IndexPage = () => (
   <Layout>
     <Sidebar />
@@ -24,10 +24,10 @@ const IndexPage = () => (
           </div>
           <p className="lead">
           Hi! I'm Nate, a Chicago based fella interested in most things technology. You can usually find me in a game of
-           Rocket League, CS:GO, tinkering on one of my pet projects, or out enjoying one of Logan Square's establishments. 
+           Rocket League, CS:GO, or tinkering on one of my pet projects. 
           </p>
           <p className="lead mb-5">
-          Outside of technology, I am an aspiring professional home cook (no foodstagram yet), nature enjoyer, and a flying enthusiast.
+          Outside of technology, I am an aspiring professional home cook, nature enjoyer, and a flying enthusiast.
           </p>
           <p className="lead mb-5">
           </p>      
@@ -87,7 +87,7 @@ const IndexPage = () => (
               <h3 className="mb-0">IT Consultant</h3>
               <div className="subheading mb-3">Prescient Solutions at MC Group / Icon</div>
               <p>
-              At Prescient, I'm part of a "Do it all" team that's embedded onsite with our client.
+              At Prescient, I'm part of a "do it all" team that's embedded onsite with our client.
               </p><p>
               Anything from server infrastructure, core / public networking, network security, Active Directory, VDI, and application deployment,
               the team and myself are behind it.

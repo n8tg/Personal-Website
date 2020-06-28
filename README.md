@@ -1,6 +1,6 @@
 # Nate Gramer's Personal Website
 
-[![Master Site](https://github.com/n8tg/Personal-Website/workflows/Deploy%20Master%20Site/badge.svg?branch=master)][![Deploy Development Site](https://github.com/n8tg/Personal-Website/workflows/Deploy%20Development%20Site/badge.svg?branch=dev)](https://dev.nategramer.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Master Site](https://github.com/n8tg/Personal-Website/workflows/Deploy%20Master%20Site/badge.svg?branch=master) [![Deploy Development Site](https://github.com/n8tg/Personal-Website/workflows/Deploy%20Development%20Site/badge.svg?branch=dev)](https://dev.nategramer.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 This is my Gatsby.js website based on Resume by startbootstrap.
 
@@ -17,7 +17,7 @@ React and Gatsby seem to fit this bill with strong plugin support, so I'm rollin
 
 ![Site Diagram](nategramer.com_-_s3_backed_public_website.png)
 
-## Cloning / Forking this repo
+## Cloning / Forking / Making this repo your own
 
 Check out the great instructions by [Anubhav](https://github.com/anubhavsrivastava/gatsby-starter-resume)
 
