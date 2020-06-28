@@ -4,10 +4,23 @@ from diagrams.aws.network import Route53, CF
 from diagrams.aws.storage import S3
 from diagrams.aws.management import Cloudformation
 from diagrams.onprem.vcs import Github
+from diagrams.onprem.network import Internet
 
 with Diagram("NateGramer.com - S3 Backed Public Website", show=False):
-    with Cluster("Development Branch Stack"):
-        devDns = Route53("<branch>.NateGramer.com")
+    with Cluster("Feature Branch Stack"):
+        featureDns = Route53("<branch>.NateGramer.com")
+        featureCloudfront = CF("CloudFront Distribution")
+        featureBucket = S3("Site Storage")
+        featureStack = [featureDns,
+                featureCloudfront,
+                featureBucket]
+        featureDns >> featureCloudfront >> featureBucket
+    
+    Github("Pull in any feature branch") >> Cloudformation("Branch Stack") >> featureStack
+    Internet() >> featureDns
+
+    with Cluster("Dev Branch Stack"):
+        devDns = Route53("dev.NateGramer.com")
         devCloudfront = CF("CloudFront Distribution")
         devBucket = S3("Site Storage")
         devStack = [devDns,
@@ -15,7 +28,8 @@ with Diagram("NateGramer.com - S3 Backed Public Website", show=False):
                 devBucket]
         devDns >> devCloudfront >> devBucket
     
-    Github("Pull in any Development Branch") >> Cloudformation("Branch Stack") >> devStack
+    Github("Push in Dev Branch") >> Cloudformation("Branch Stack") >> devStack
+    Internet() >> devDns
 
     with Cluster("Master Branch Stack"):
         dns = Route53("NateGramer.com")
@@ -25,5 +39,6 @@ with Diagram("NateGramer.com - S3 Backed Public Website", show=False):
                 cloudfront,
                 bucket]
         dns >> cloudfront >> bucket
-
-    Github("Push in Master Branch") >> Cloudformation("Master Branch Template") >> stack
+        
+    Github("Push in Master Branch") >> Cloudformation("Master Branch Stack") >> stack
+    Internet() >> dns
