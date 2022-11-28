@@ -1,12 +1,11 @@
-name: Build out branch environment for testing before a merge is completed
+name: "[CI] Deploy Main Site"
 
+# This will always keep the development site up to date for hotfixes.
 on:
-  pull_request:
+  push:
     branches:
-    - "*"
-    - "!main"
-    - "!dev"
-    
+      - main
+
 jobs:
   build-site:
     runs-on: ubuntu-latest
@@ -16,7 +15,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: ${{ env.GITHUB_REF }}
-      
+
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
@@ -24,12 +23,10 @@ jobs:
         # extended: true
 
     - name: Build
-      working-directory: nategramer.com
       run: hugo --minify
 
     - name: Save built site as an artifact
       uses: actions/upload-artifact@v2
-      working-directory: nategramer.com
       with:
         name: Built-Site
         path: ./public
@@ -53,12 +50,12 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync . s3://${{ GITHUB.head_ref }}.nategramer
+        aws s3 sync . s3://nategramer
 
     - name: Get CloudFront Distribution Details
       run: |
         echo "CF_DEPLOYMENT=$(aws cloudformation describe-stack-resource \
-        --stack-name ${{ GITHUB.head_ref }}-nategramer \
+        --stack-name nategramer \
         --logical-resource-id cloudfrontDistribution \
         | jq -r .StackResourceDetail.PhysicalResourceId)" >> $GITHUB_ENV
     
@@ -74,8 +71,6 @@ jobs:
   deploy-environment:
     runs-on: ubuntu-latest
     name: Deploy CloudFormation Template
-    outputs:
-      branch: ${{ steps.deploy-environment.branchstep.branch }}
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -92,7 +87,7 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-        name: ${{ GITHUB.head_ref }}-nategramer
-        template: AWSEnvironment.yaml
+        name: nategramer
+        template: MasterAWSEnvironment.yaml
         no-fail-on-empty-changeset: "1"
-        parameter-overrides: "DomainPrefix=${{ GITHUB.head_ref }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
+        parameter-overrides: "SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
