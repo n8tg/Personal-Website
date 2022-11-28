@@ -1,10 +1,10 @@
-name: Deploy Master Site
+name: [CI] Deploy Development Site
 
 # This will always keep the development site up to date for hotfixes.
 on:
   push:
-    branches:
-      - master
+    branches: 
+    - "dev"
 
 jobs:
   build-site:
@@ -50,12 +50,12 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync . s3://nategramer
+        aws s3 sync . s3://${{ GITHUB.ref_name }}.nategramer
 
     - name: Get CloudFront Distribution Details
       run: |
         echo "CF_DEPLOYMENT=$(aws cloudformation describe-stack-resource \
-        --stack-name nategramer \
+        --stack-name ${{ GITHUB.ref_name }}-nategramer \
         --logical-resource-id cloudfrontDistribution \
         | jq -r .StackResourceDetail.PhysicalResourceId)" >> $GITHUB_ENV
     
@@ -71,6 +71,8 @@ jobs:
   deploy-environment:
     runs-on: ubuntu-latest
     name: Deploy CloudFormation Template
+    outputs:
+      branch: ${{ steps.deploy-environment.branchstep.branch }}
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -87,7 +89,7 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-        name: nategramer
-        template: MasterAWSEnvironment.yaml
+        name: ${{ GITHUB.ref_name }}-nategramer
+        template: AWSEnvironment.yaml
         no-fail-on-empty-changeset: "1"
-        parameter-overrides: "SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
+        parameter-overrides: "DomainPrefix=${{ GITHUB.ref_name }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
