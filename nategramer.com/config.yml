@@ -126,7 +126,7 @@ menu:
       weight: 20
     - identifier: Photography
       name: Photography
-      url: /photography/
+      url: https://photos.nategramer.com
       weight: 30
     - identifier: Posts
       name: Posts
