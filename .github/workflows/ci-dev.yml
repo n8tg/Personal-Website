@@ -27,11 +27,10 @@ jobs:
       run: hugo --minify
 
     - name: Save built site as an artifact
-      working-directory: nategramer.com
       uses: actions/upload-artifact@v2
       with:
         name: Built-Site
-        path: ./public
+        path: nategramer.com/public
 
   deploy-site:
     runs-on: ubuntu-latest
