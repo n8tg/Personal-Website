@@ -4,13 +4,13 @@ on:
   pull_request:
     branches:
     - "*"
-    - "!master"
+    - "!main"
     - "!dev"
     
 jobs:
   build-site:
     runs-on: ubuntu-latest
-    name: Build Gatsby Site and save as an artifact
+    name: Build site and save as an artifact
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -24,10 +24,12 @@ jobs:
         # extended: true
 
     - name: Build
+      working-directory: nategramer.com
       run: hugo --minify
 
     - name: Save built site as an artifact
       uses: actions/upload-artifact@v2
+      working-directory: nategramer.com
       with:
         name: Built-Site
         path: ./public
@@ -42,10 +44,6 @@ jobs:
       with:
         name: Built-Site
 
-    - name: Save branch name in ENV
-      run: | 
-        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -55,14 +53,14 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync . s3://${{ env.branch }}.nategramer
+        aws s3 sync . s3://${{ GITHUB.head_ref }}.nategramer
 
     - name: Get CloudFront Distribution Details
       run: |
-        echo "::set-env name=CF_DEPLOYMENT::$(aws cloudformation describe-stack-resource \
-        --stack-name ${{ env.branch }}-nategramer \
+        echo "CF_DEPLOYMENT=$(aws cloudformation describe-stack-resource \
+        --stack-name ${{ GITHUB.head_ref }}-nategramer \
         --logical-resource-id cloudfrontDistribution \
-        | jq -r .StackResourceDetail.PhysicalResourceId)"
+        | jq -r .StackResourceDetail.PhysicalResourceId)" >> $GITHUB_ENV
     
     - name: Invalidate Cloudfront distribution
       uses: chetan/invalidate-cloudfront-action@master
@@ -84,10 +82,6 @@ jobs:
       with:
         ref: ${{ env.GITHUB_REF }}
 
-    - name: Save branch name in ENV
-      run: | 
-        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -98,7 +92,7 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-        name: ${{  env.branch }}-nategramer
+        name: ${{ GITHUB.head_ref }}-nategramer
         template: AWSEnvironment.yaml
         no-fail-on-empty-changeset: "1"
-        parameter-overrides: "DomainPrefix=${{  env.branch }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"
+        parameter-overrides: "DomainPrefix=${{ GITHUB.head_ref }}.,SSLCertARN=${{ secrets.AWS_SSL_CERT_ARN }}"

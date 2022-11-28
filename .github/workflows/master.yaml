@@ -54,10 +54,10 @@ jobs:
 
     - name: Get CloudFront Distribution Details
       run: |
-        echo "::set-env name=CF_DEPLOYMENT::$(aws cloudformation describe-stack-resource \
+        echo "CF_DEPLOYMENT=$(aws cloudformation describe-stack-resource \
         --stack-name nategramer \
         --logical-resource-id cloudfrontDistribution \
-        | jq -r .StackResourceDetail.PhysicalResourceId)"
+        | jq -r .StackResourceDetail.PhysicalResourceId)" >> $GITHUB_ENV
     
     - name: Invalidate Cloudfront distribution
       uses: chetan/invalidate-cloudfront-action@master
