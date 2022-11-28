@@ -51,7 +51,7 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync . s3://${{ GITHUB.ref_name }}.nategramer
+        aws s3 sync . s3://${{ GITHUB.ref_name }}.nategramer --delete
 
     - name: Get CloudFront Distribution Details
       run: |

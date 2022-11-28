@@ -29,7 +29,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Built-Site
-        path: ./public
+        path: nategramer.com/public
 
   deploy-site:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
 
     - name: Copy files to S3 with the AWS CLI
       run: |
-        aws s3 sync . s3://nategramer
+        aws s3 sync . s3://nategramer --delete
 
     - name: Get CloudFront Distribution Details
       run: |
