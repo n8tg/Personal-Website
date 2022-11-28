@@ -1,4 +1,4 @@
-baseURL: https://nategramer.com
+baseURL: https://dev.nategramer.com
 languageCode: en-us
 title: Nate Gramer
 theme: PaperMod
@@ -131,9 +131,6 @@ menu:
     - identifier: Posts
       name: Posts
       url: /categories/
-    - identifier: Archive
-      name: Archives
-      url: archives
 
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
