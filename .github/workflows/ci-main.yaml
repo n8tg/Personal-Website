@@ -24,6 +24,7 @@ jobs:
         # extended: true
 
     - name: Build
+      working-directory: nategramer.com
       run: hugo --minify
 
     - name: Save built site as an artifact
