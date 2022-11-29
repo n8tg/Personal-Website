@@ -4,17 +4,13 @@ on:
   delete:
     branches:
     - "*"
-    - "!master"
+    - "!main"
 
 jobs:
   clean-env:
     runs-on: ubuntu-latest
     name: Remove branch deployed environment 
     steps:
-    - name: Save branch name in ENV
-      run: | 
-        echo ::set-env name=branch::${GITHUB_REF#refs/*/}
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -24,8 +20,8 @@ jobs:
 
     - name: Empty S3 bucket with the AWS CLI
       run: |
-        aws s3 rm s3://${{ env.branch }}.nategramer --recursive
+        aws s3 rm s3://${{ GITHUB.head_ref }}.nategramer --recursive
 
     - name: Remove CloudFormation Stack with AWS CLI
       run: |
-        aws cloudformation delete-stack --stack-name ${{ env.branch }}-nategramer
+        aws cloudformation delete-stack --stack-name ${{ GITHUB.head_ref }}-nategramer
