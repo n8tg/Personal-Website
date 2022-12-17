@@ -62,7 +62,7 @@ params:
   profileMode:
     enabled: true # needs to be explicitly set
     subtitle:
-    imageUrl: "images/Nate-Gramer.jpg"
+    imageUrl: "images/Nate-Gramer-Christmas.jpg"
     imageWidth: 240
     imageHeight: 240
     imageTitle: My face
