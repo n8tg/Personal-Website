@@ -26,7 +26,7 @@ jobs:
     # Need to replace baseURL with dev url. 
     - name: Use Dev URL
       working-directory: nategramer.com
-      run: sed -i 's/https:\/\/nategramer.com/https:\/\/dev.nategramer.com/' config.yaml
+      run: sed -i 's/https:\/\/nategramer.com/https:\/\/dev.nategramer.com/' config.yml
       shell: bash
 
     - name: Build
