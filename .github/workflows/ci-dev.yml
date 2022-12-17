@@ -23,6 +23,11 @@ jobs:
         hugo-version: 'latest'
         # extended: true
 
+    # Need to replace baseURL with dev url. 
+    - name: Use Dev URL
+      run: sed 's/https:\/\/nategramer.com/https:\/\/dev.nategramer.com/'
+      shell: bash
+
     - name: Build
       working-directory: nategramer.com
       run: hugo --minify
